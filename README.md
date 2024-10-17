@@ -3,9 +3,9 @@
 <!-- insert logo img -->
 
 ## Table of contents
-- [Introduction & Problem Statement](https://github.com/fadalid/SQLchallenge-DannysDiner#introduction)
-- [Skills showcased](https://github.com/fadalid/SQLchallenge-DannysDiner#skills)
-- [ASK -> Business task](https://github.com/fadalid/SQLchallenge-DannysDiner#ask)
+- [Introduction & Problem Statement](#introduction)
+- [Skills showcased](#skills-showcased)
+- [ASK -> Business task](#ask)
 - [PREPARE](https://github.com/fadalid/SQLchallenge-DannysDiner#prepare)
 - [PROCESS](https://github.com/fadalid/SQLchallenge-DannysDiner#process)
 - [ANALYZE](https://github.com/fadalid/SQLchallenge-DannysDiner#analyze)
@@ -142,3 +142,5 @@ GROUP BY customer_id;
 ```
 
 3. What was the first item from the menu purchased by each customer?
+
+```
