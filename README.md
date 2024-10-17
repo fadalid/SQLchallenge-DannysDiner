@@ -6,11 +6,11 @@
 - [Introduction & Problem Statement](#introduction)
 - [Skills showcased](#skills-showcased)
 - [ASK -> Business task](#ask)
-- [PREPARE](https://github.com/fadalid/SQLchallenge-DannysDiner#prepare)
-- [PROCESS](https://github.com/fadalid/SQLchallenge-DannysDiner#process)
-- [ANALYZE](https://github.com/fadalid/SQLchallenge-DannysDiner#analyze)
-- [SHARE](https://github.com/fadalid/SQLchallenge-DannysDiner#share)
-- [ACT](https://github.com/fadalid/SQLchallenge-DannysDiner#act)
+- [PREPARE](#prepare)
+- [PROCESS](#process)
+- [ANALYZE](#analyze)
+- [SHARE](#share)
+- [ACT](#act)
 
 
 ## Introduction 
@@ -29,9 +29,9 @@ Danny wants some insights to help him decide whether he should expand the existi
 
 ## PREPARE 
 Danny has shared with you 3 key datasets for this case study:
-- <code class="language-plaintext">sales</code>
-- <code class="language-plaintext">menu</code>
-- <code class="language-plaintext">members</code>
+- <code>sales</code>
+- <code>menu</code>
+- <code>members</code>
   
 You can inspect the entity relationship diagram and example data below. <br>
 <!-- insert diagram img -->
@@ -45,7 +45,10 @@ SET search_path = dannys_diner;
 
 ```
 
+<details>
+  <summary>
 Creating the <code>sales</code> table 
+  </summary>
 
 ```SQL
 
@@ -75,8 +78,12 @@ VALUES
   ('C', '2021-01-07', '3');
 
 ```
+</details>
 
+<details>
+  <summary>
 Creating the <code>menu</code> table
+  </summary>
 
 ```SQL
 
@@ -94,8 +101,12 @@ VALUES
   ('3', 'ramen', '12');
 
 ```
+</details>
 
+<details>
+  <summary>
 Creating the <code>members</code> table
+  </summary>
 
 ```SQL
 
@@ -111,6 +122,7 @@ VALUES
   ('B', '2021-01-09');
 
 ```
+</details>
 
 ## PROCESS
 
