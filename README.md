@@ -38,7 +38,7 @@ You can inspect the entity relationship diagram and example data below. <br>
 
 ### dannys_diner database schema
 
-```
+```SQL
 
 CREATE SCHEMA dannys_diner;
 SET search_path = dannys_diner;
@@ -47,7 +47,7 @@ SET search_path = dannys_diner;
 
 Creating the <code>sales</code> table 
 
-```
+```SQL
 
 CREATE TABLE sales (
   "customer_id" VARCHAR(1),
@@ -78,7 +78,7 @@ VALUES
 
 Creating the <code>menu</code> table
 
-```
+```SQL
 
 CREATE TABLE menu (
   "product_id" INTEGER,
@@ -97,7 +97,7 @@ VALUES
 
 Creating the <code>members</code> table
 
-```
+```SQL
 
 CREATE TABLE members (
   "customer_id" VARCHAR(1),
@@ -111,3 +111,34 @@ VALUES
   ('B', '2021-01-09');
 
 ```
+
+## PROCESS
+
+## ANALYZE
+
+### Case study questions
+
+1. What is the total amount each customer spent at the restaurant?
+
+```SQL
+
+SELECT customer_id, SUM(price) AS total_amount
+FROM dannys_diner.sales
+JOIN dannys_diner.menu
+ON sales.product_id = menu.product_id
+GROUP BY customer_id
+ORDER BY total_amount;
+
+```
+
+2. How many days has each customer visited the restaurant?
+
+```SQL
+
+SELECT customer_id, COUNT(DISTINCT order_date) AS days_visited
+FROM dannys_diner.sales
+GROUP BY customer_id;
+
+```
+
+3. What was the first item from the menu purchased by each customer?
