@@ -130,7 +130,10 @@ VALUES
 
 ### Case study questions
 
+<details>
+  <summary>
 1. What is the total amount each customer spent at the restaurant?
+  </summary>
 
 ```SQL
 
@@ -142,8 +145,12 @@ GROUP BY customer_id
 ORDER BY total_amount;
 
 ```
+</details>
 
+<details>
+  <summary>
 2. How many days has each customer visited the restaurant?
+  </summary>
 
 ```SQL
 
@@ -152,7 +159,29 @@ FROM dannys_diner.sales
 GROUP BY customer_id;
 
 ```
+</details>
 
+<details>
+  <summary>
 3. What was the first item from the menu purchased by each customer?
+  </summary>
+
+```SQL
+
+WITH sales_ordered AS
+(
+   SELECT customer_id, order_date, product_name,
+      DENSE_RANK() OVER(PARTITION BY sales.customer_id
+      ORDER BY sales.order_date) AS rank
+   FROM dannys_diner.sales
+   JOIN dannys_diner.menu
+      ON sales.product_id = menu.product_id
+)
+
+SELECT customer_id, product_name
+FROM sales_ordered
+WHERE rank = 1
+GROUP BY customer_id, product_name;
 
 ```
+</details>
