@@ -7,6 +7,11 @@
 - [Skills showcased](https://github.com/fadalid/SQLchallenge-DannysDiner#skills)
 - [ASK -> Business task](https://github.com/fadalid/SQLchallenge-DannysDiner#ask)
 - [PREPARE](https://github.com/fadalid/SQLchallenge-DannysDiner#prepare)
+- [PROCESS](https://github.com/fadalid/SQLchallenge-DannysDiner#process)
+- [ANALYZE](https://github.com/fadalid/SQLchallenge-DannysDiner#analyze)
+- [SHARE](https://github.com/fadalid/SQLchallenge-DannysDiner#share)
+- [ACT](https://github.com/fadalid/SQLchallenge-DannysDiner#act)
+
 
 ## Introduction 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
