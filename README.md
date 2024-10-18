@@ -130,7 +130,8 @@ VALUES
 
 ### Case study questions
 
-1. What is the total amount each customer spent at the restaurant?
+---
+*1. What is the total amount each customer spent at the restaurant?*
 <details>
   <summary>
 		SQL Query
@@ -148,14 +149,26 @@ ORDER BY total_amount;
 ```
 </details>
 
-**Answer**
+| customer_id | total_amount |
+| ----------- | ------------ |
+| C           | 36           |
+| B           | 74           |
+| A           | 76           |
+
+**Answer** The total amount each customer spent at the restaurant is: <br>
+- Customer C	$36
+- Customer B	$74
+- Customer A	$76
 
 <details>
 	<summary>
 		Resolution
 	</summary>
+
+	
 </details>
 
+---
 2. How many days has each customer visited the restaurant?
 <details>
   <summary>
@@ -171,7 +184,16 @@ GROUP BY customer_id;
 ```
 </details>
 
-**Answer**
+| customer_id | days_visited |
+| ----------- | ------------ |
+| A           | 4            |
+| B           | 6            |
+| C           | 2            |
+
+**Answer** Each customer has visited the restaurant for: <br>
+- Customer A 4 days
+- Customer B 6 days
+- Customer C 2 days
 
 <details>
 	<summary>
@@ -179,6 +201,7 @@ GROUP BY customer_id;
 	</summary>
 </details>
 
+---
 3. What was the first item from the menu purchased by each customer?
 <details>
   <summary>
