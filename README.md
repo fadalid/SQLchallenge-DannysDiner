@@ -138,14 +138,12 @@ VALUES
   </summary>
 
 ```SQL
-
 SELECT customer_id, SUM(price) AS total_amount
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
 ON sales.product_id = menu.product_id
 GROUP BY customer_id
 ORDER BY total_amount;
-
 ```
 </details>
 
@@ -156,31 +154,27 @@ ORDER BY total_amount;
 | A           | 76           |
 
 **Answer** The total amount each customer spent at the restaurant is: <br>
-- Customer C	$36
-- Customer B	$74
-- Customer A	$76
+- Customer C		$36
+- Customer B		$74
+- Customer A		$76
 
 <details>
 	<summary>
 		Resolution
 	</summary>
-
-	
 </details>
 
 ---
-2. How many days has each customer visited the restaurant?
+*2. How many days has each customer visited the restaurant?*
 <details>
   <summary>
 		SQL Query
   </summary>
 
 ```SQL
-
 SELECT customer_id, COUNT(DISTINCT order_date) AS days_visited
 FROM dannys_diner.sales
 GROUP BY customer_id;
-
 ```
 </details>
 
@@ -191,9 +185,9 @@ GROUP BY customer_id;
 | C           | 2            |
 
 **Answer** Each customer has visited the restaurant for: <br>
-- Customer A 4 days
-- Customer B 6 days
-- Customer C 2 days
+- Customer A		4 days
+- Customer B		6 days
+- Customer C		2 days
 
 <details>
 	<summary>
@@ -202,14 +196,13 @@ GROUP BY customer_id;
 </details>
 
 ---
-3. What was the first item from the menu purchased by each customer?
+*3. What was the first item from the menu purchased by each customer?*
 <details>
   <summary>
 		SQL Query
   </summary>
 
 ```SQL
-
 WITH sales_ordered AS
 (
    SELECT customer_id, order_date, product_name,
@@ -224,11 +217,20 @@ SELECT customer_id, product_name
 FROM sales_ordered
 WHERE rank = 1
 GROUP BY customer_id, product_name;
-
 ```
 </details>
 
-**Answer**
+| customer_id | product_name |
+| ----------- | ------------ |
+| A           | curry        |
+| A           | sushi        |
+| B           | curry        |
+| C           | ramen        |
+
+**Answer** The first item purchased by each customer was: <br>
+- Customer A		curry & sushi
+- Customer B		curry
+- Customer C		ramen
 
 <details>
 	<summary>
@@ -236,14 +238,14 @@ GROUP BY customer_id, product_name;
 	</summary>
 </details>
 
-4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+---
+*4. What is the most purchased item on the menu and how many times was it purchased by all customers?*
 <details>
   <summary>
   	SQL Query
   </summary>
 
 ```SQL
-
 WITH most_purchased_item AS 
 	(
 	SELECT menu.product_id, menu.product_name, COUNT(sales.product_id) AS item_sales
@@ -260,11 +262,19 @@ WITH most_purchased_item AS
  JOIN most_purchased_item
  ON sales.product_id = most_purchased_item.product_id
  GROUP BY customer_id, most_purchased_item.product_name;
-
 ```
 </details>
 
-**Answer**
+| customer_id | product_name | item_purchases |
+| ----------- | ------------ | -------------- |
+| A           | ramen        | 3              |
+| B           | ramen        | 2              |
+| C           | ramen        | 3              |
+
+**Answer** The most purchased item on the menu is *Ramen* and it was purchased by each customer: <br>
+- Customer A		3 times
+- Customer B		2 times
+- Customer C		3 times
 
 <details>
 	<summary>
@@ -272,25 +282,37 @@ WITH most_purchased_item AS
 	</summary>
 </details>
 
-5. Which item was the most popular for each customer?
+---
+*5. Which item was the most popular for each customer?*
 <details>
 	<summary>
 		SQL Query
   </summary>
 
 ```SQL
-
 SELECT customer_id, product_name, COUNT(sales.product_id) AS item_purchases
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
 ON sales.product_id = menu.product_id
 GROUP BY customer_id, product_name
 ORDER BY item_purchases DESC
-
 ```
 </details>
 
-**Answer**
+| customer_id | product_name | item_purchases |
+| ----------- | ------------ | -------------- |
+| C           | ramen        | 3              |
+| A           | ramen        | 3              |
+| B           | curry        | 2              |
+| B           | sushi        | 2              |
+| B           | ramen        | 2              |
+| A           | curry        | 2              |
+| A           | sushi        | 1              |
+
+**Answer** The most popular item for each customer was: <br>
+- Customer C		Ramen
+- Customer A		Ramen
+- Customer B		Curry
 
 <details>
 	<summary>
@@ -298,7 +320,8 @@ ORDER BY item_purchases DESC
 	</summary>
 </details>
 
-6. Which item was purchased first by the customer after they became a member?
+---
+*6. Which item was purchased first by the customer after they became a member?*
 <details>
 	<summary>
 		SQL Query
@@ -321,11 +344,17 @@ FROM dannys_diner.menu
 JOIN purchase_date
 ON menu.product_id = purchase_date.product_id
 WHERE first_member_purchase = 1;
-
 ```
 </details>
 
-**Answer**
+| customer_id | product_name | order_date               | first_member_purchase |
+| ----------- | ------------ | ------------------------ | --------------------- |
+| B           | sushi        | 2021-01-11T00:00:00.000Z | 1                     |
+| A           | curry        | 2021-01-07T00:00:00.000Z | 1                     |
+
+**Answer** The first item each customer bought after becaming a member was: <br>
+- Customer B		Sushi
+- Customer A		Curry
 
 <details>
 	<summary>
@@ -333,12 +362,14 @@ WHERE first_member_purchase = 1;
 	</summary>
 </details>
 
-7. Which item was purchased just before the customer became a member?
+---
+*7. Which item was purchased just before the customer became a member?*
 <details>
 	<summary>
 		SQL Query
 	</summary>
 </details>
+
 ```SQL
 WITH last_purchase_cte AS
 	(
@@ -362,7 +393,15 @@ GROUP BY customer_id, product_name, order_date;
 ```
 </details>
 
-**Answer**
+| customer_id | product_name | order_date               |
+| ----------- | ------------ | ------------------------ |
+| A           | curry        | 2021-01-01T00:00:00.000Z |
+| A           | sushi        | 2021-01-01T00:00:00.000Z |
+| B           | sushi        | 2021-01-04T00:00:00.000Z |
+
+**Answer** The item each customer bought just before becaming a member was: <br>
+- Customer A		Curry & Sushi
+- Customer B		Sushi
 
 <details>
 	<summary>
