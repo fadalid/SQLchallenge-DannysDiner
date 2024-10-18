@@ -280,4 +280,23 @@ ORDER BY item_purchases DESC
 	<summary>
 		SQL Query
 	</summary>
+
+```SQL
+ WITH purchase_date AS
+ 	(
+ 	SELECT sales.customer_id, join_date, order_date, product_id,
+    	DENSE_RANK() OVER(PARTITION BY sales.customer_id
+      	ORDER BY sales.order_date) AS first_member_purchase
+   	FROM dannys_diner.sales
+   	JOIN dannys_diner.members
+    	  ON sales.customer_id = members.customer_id
+   	WHERE sales.order_date >= members.join_date
+    )
+    
+SELECT customer_id, product_name, order_date, first_member_purchase
+FROM dannys_diner.menu
+JOIN purchase_date
+ON menu.product_id = purchase_date.product_id
+WHERE first_member_purchase = 1;
+```
 </details>
