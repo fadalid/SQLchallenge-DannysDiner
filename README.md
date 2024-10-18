@@ -312,9 +312,30 @@ WHERE first_member_purchase = 1;
 
 7. Which item was purchased just before the customer became a member?
 <details>
-
+	<summary>
+		SQL Query
+	</summary>
 </details>
-```
+```SQL
+WITH last_purchase_cte AS
+	(
+	SELECT sales.customer_id, product_id, order_date,
+		DENSE_RANK() OVER(PARTITION BY sales.customer_id 
+		ORDER BY order_date DESC) AS last_purchase
+	FROM dannys_diner.sales
+	JOIN dannys_diner.members
+	 	ON sales.customer_id = members.customer_id
+	WHERE order_date < join_date
+	GROUP BY sales.customer_id, product_id, order_date
+	ORDER BY last_purchase
+    )
+    
+SELECT customer_id, product_name, order_date
+FROM last_purchase_cte
+JOIN dannys_diner.menu
+	ON last_purchase_cte.product_id = menu.product_id
+WHERE last_purchase = 1
+GROUP BY customer_id, product_name, order_date;
 ```
 </details>
 
