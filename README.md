@@ -130,9 +130,10 @@ VALUES
 
 ### Case study questions
 
+1. What is the total amount each customer spent at the restaurant?
 <details>
   <summary>
-1. What is the total amount each customer spent at the restaurant?
+		SQL Query
   </summary>
 
 ```SQL
@@ -155,9 +156,10 @@ ORDER BY total_amount;
 	</summary>
 </details>
 
+2. How many days has each customer visited the restaurant?
 <details>
   <summary>
-2. How many days has each customer visited the restaurant?
+		SQL Query
   </summary>
 
 ```SQL
@@ -177,9 +179,10 @@ GROUP BY customer_id;
 	</summary>
 </details>
 
+3. What was the first item from the menu purchased by each customer?
 <details>
   <summary>
-3. What was the first item from the menu purchased by each customer?
+		SQL Query
   </summary>
 
 ```SQL
@@ -210,9 +213,10 @@ GROUP BY customer_id, product_name;
 	</summary>
 </details>
 
+4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 <details>
   <summary>
-    4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+  	SQL Query
   </summary>
 
 ```SQL
@@ -245,9 +249,10 @@ WITH most_purchased_item AS
 	</summary>
 </details>
 
+5. Which item was the most popular for each customer?
 <details>
 	<summary>
-		5. Which item was the most popular for each customer?
+		SQL Query
   </summary>
 
 ```SQL
@@ -270,8 +275,9 @@ ORDER BY item_purchases DESC
 	</summary>
 </details>
 
+6. Which item was purchased first by the customer after they became a member?
 <details>
 	<summary>
-		6. Which item was purchased first by the customer after they became a member?
+		SQL Query
 	</summary>
 </details>
