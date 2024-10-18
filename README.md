@@ -46,7 +46,7 @@ SET search_path = dannys_diner;
 ```
 
 <details>
-  <summary>
+	<summary>
 Creating the <code>sales</code> table 
   </summary>
 
@@ -147,6 +147,14 @@ ORDER BY total_amount;
 ```
 </details>
 
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
+</details>
+
 <details>
   <summary>
 2. How many days has each customer visited the restaurant?
@@ -159,6 +167,14 @@ FROM dannys_diner.sales
 GROUP BY customer_id;
 
 ```
+</details>
+
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
 </details>
 
 <details>
@@ -184,6 +200,14 @@ WHERE rank = 1
 GROUP BY customer_id, product_name;
 
 ```
+</details>
+
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
 </details>
 
 <details>
@@ -213,14 +237,41 @@ WITH most_purchased_item AS
 ```
 </details>
 
+**Answer**
+
 <details>
-  <summary>
-    5. Which item was the most popular for each customer?
+	<summary>
+		Resolution
+	</summary>
+</details>
+
+<details>
+	<summary>
+		5. Which item was the most popular for each customer?
   </summary>
 
 ```SQL
 
-
+SELECT customer_id, product_name, COUNT(sales.product_id) AS item_purchases
+FROM dannys_diner.sales
+JOIN dannys_diner.menu
+ON sales.product_id = menu.product_id
+GROUP BY customer_id, product_name
+ORDER BY item_purchases DESC
 
 ```
+</details>
+
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
+</details>
+
+<details>
+	<summary>
+		6. Which item was purchased first by the customer after they became a member?
+	</summary>
 </details>
