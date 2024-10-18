@@ -298,5 +298,30 @@ FROM dannys_diner.menu
 JOIN purchase_date
 ON menu.product_id = purchase_date.product_id
 WHERE first_member_purchase = 1;
+
 ```
+</details>
+
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
+</details>
+
+7. Which item was purchased just before the customer became a member?
+<details>
+
+</details>
+```
+```
+</details>
+
+**Answer**
+
+<details>
+	<summary>
+		Resolution
+	</summary>
 </details>
