@@ -416,13 +416,28 @@ GROUP BY customer_id, product_name, order_date;
 	</summary>
 
 ```SQL
-
-
+SELECT sales.customer_id,
+	COUNT(sales.product_id) AS total_items,
+    SUM(price) AS total_amount
+FROM dannys_diner.sales
+JOIN dannys_diner.menu
+ON sales.product_id = menu.product_id
+JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+WHERE order_date < join_date
+GROUP BY sales.customer_id;
 
 ```
 </details>
 
-**Answer**
+| customer_id | total_items | total_amount |
+| ----------- | ----------- | ------------ |
+| B           | 3           | 40           |
+| A           | 2           | 25           |
+
+**Answer** The total number of items and amount spent of each customer before de became a member are:
+- Customer B 3 items, $40
+- Customer A 2 items, $25
 
 <details>
 	<summary>
@@ -451,11 +466,13 @@ ORDER BY points;
 
 ```
 </details>
+
 | customer_id | points |
 | ----------- | ------ |
 | C           | 360    |
 | A           | 860    |
 | B           | 940    |
+
 **Answer** Te total amount of points each customer has is:
 - Customer C 360
 - Customer A 860
