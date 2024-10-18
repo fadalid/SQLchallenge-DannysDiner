@@ -368,7 +368,6 @@ WHERE first_member_purchase = 1;
 	<summary>
 		SQL Query
 	</summary>
-</details>
 
 ```SQL
 WITH last_purchase_cte AS
@@ -402,6 +401,28 @@ GROUP BY customer_id, product_name, order_date;
 **Answer** The item each customer bought just before becaming a member was: <br>
 - Customer A		Curry & Sushi
 - Customer B		Sushi
+
+<details>
+	<summary>
+		Resolution
+	</summary>
+</details>
+
+---
+*8. What is the total items and amount spent for each member before they became a member?*
+<details>
+	<summary>
+		SQL Query
+	</summary>
+
+```SQL
+
+
+
+```
+</details>
+
+**Answer**
 
 <details>
 	<summary>
