@@ -485,7 +485,51 @@ ORDER BY points;
 </details>
 
 ---
-*10. *
+*10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?*
+<details>
+	<summary>
+		SQL Query
+	</summary>
+
+```SQL
+SELECT sales.customer_id,
+	SUM(
+      CASE WHEN order_date >= join_date
+      AND order_date < (join_date +7) THEN price*20
+      WHEN sales.product_id = 1 THEN price*20
+      ELSE price*10 END) AS points
+FROM dannys_diner.sales
+JOIN dannys_diner.menu
+ON sales.product_id = menu.product_id
+JOIN dannys_diner.members
+ON sales.customer_id = members.customer_id
+WHERE order_date <= '2021-01-31'
+GROUP BY sales.customer_id;
+
+```
+</details>
+
+| customer_id | points |
+| ----------- | ------ |
+| A           | 1370   |
+| B           | 820    |
+
+**Answer** By the end of January, customer members have:
+- Customer A 1370 points
+- Customer B 820 points
+
+<details>
+	<summary>
+		Resolution
+	</summary>
+</details>
+
+---
+*Bonus Question #1*
+Recreate the following table output using the available data:
+
+<!-- put table -->
+
 <details>
 	<summary>
 		SQL Query
@@ -496,11 +540,4 @@ ORDER BY points;
 
 
 ```
-
-**Answer**
-
-<details>
-	<summary>
-		Resolution
-	</summary>
 </details>
