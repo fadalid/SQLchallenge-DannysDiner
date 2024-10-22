@@ -541,6 +541,7 @@ SELECT *,
 FROM clients_table;
 
 ```
+<details>
 
 | customer_id | order_date | product_name | price | member | ranking |
 | ----------- | ---------- | ------------ | ----- | ------ | ------- |
