@@ -1,7 +1,6 @@
 # SQLchallenge-DannysDiner
 📍 Case study #1 - https://8weeksqlchallenge.com/case-study-1/ by Data with Danny
-<!-- insert logo img -->
-
+![DannysDiner_logo](https://github.com/fadalid/SQLchallenge-DannysDiner/blob/main/dannysdiner-logo.png?raw=true)
 ## Table of contents
 - [Introduction & Problem Statement](#introduction)
 - [Skills showcased](#skills-showcased)
