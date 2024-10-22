@@ -33,8 +33,7 @@ Danny has shared with you 3 key datasets for this case study:
 - <code>members</code>
   
 You can inspect the entity relationship diagram and example data below. <br>
-<!-- insert diagram img -->
-
+![Tables_relationship_diagram](https://dbdiagram.io/d/Dannys-Diner-608d07e4b29a09603d12edbd?utm_source=dbdiagram_embed&utm_medium=bottom_open)
 ### dannys_diner database schema
 
 ```SQL
