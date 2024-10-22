@@ -158,12 +158,6 @@ ORDER BY total_amount;
 - Customer B		$74
 - Customer A		$76
 
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
-
 ---
 *2. How many days has each customer visited the restaurant?*
 <details>
@@ -188,12 +182,6 @@ GROUP BY customer_id;
 - Customer A		4 days
 - Customer B		6 days
 - Customer C		2 days
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *3. What was the first item from the menu purchased by each customer?*
@@ -231,12 +219,6 @@ GROUP BY customer_id, product_name;
 - Customer A		curry & sushi
 - Customer B		curry
 - Customer C		ramen
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *4. What is the most purchased item on the menu and how many times was it purchased by all customers?*
@@ -276,12 +258,6 @@ WITH most_purchased_item AS
 - Customer B		2 times
 - Customer C		3 times
 
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
-
 ---
 *5. Which item was the most popular for each customer?*
 <details>
@@ -313,12 +289,6 @@ ORDER BY item_purchases DESC
 - Customer C		Ramen
 - Customer A		Ramen
 - Customer B		Curry
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *6. Which item was purchased first by the customer after they became a member?*
@@ -355,12 +325,6 @@ WHERE first_member_purchase = 1;
 **Answer** The first item each customer bought after becaming a member was: <br>
 - Customer B		Sushi
 - Customer A		Curry
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *7. Which item was purchased just before the customer became a member?*
@@ -402,12 +366,6 @@ GROUP BY customer_id, product_name, order_date;
 - Customer A		Curry & Sushi
 - Customer B		Sushi
 
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
-
 ---
 *8. What is the total items and amount spent for each member before they became a member?*
 <details>
@@ -438,12 +396,6 @@ GROUP BY sales.customer_id;
 **Answer** The total number of items and amount spent of each customer before de became a member are:
 - Customer B 3 items, $40
 - Customer A 2 items, $25
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?*
@@ -477,12 +429,6 @@ ORDER BY points;
 - Customer C 360
 - Customer A 860
 - Customer B 940
-
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
 
 ---
 *10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?*
@@ -518,17 +464,27 @@ GROUP BY sales.customer_id;
 - Customer A 1370 points
 - Customer B 820 points
 
-<details>
-	<summary>
-		Resolution
-	</summary>
-</details>
-
 ---
 *Bonus Question #1*
 Recreate the following table output using the available data:
 
-<!-- put table -->
+| customer_id | order_date | product_name | price | member |
+| ----------- | ---------- | ------------ | ----- | ------ |
+| A           | 2021-01-07 | curry        | 15    | Y      |
+| A           | 2021-01-11 | ramen        | 12    | Y      |
+| A           | 2021-01-11 | ramen        | 12    | Y      |
+| A           | 2021-01-10 | ramen        | 12    | Y      |
+| A           | 2021-01-01 | sushi        | 10    | N      |
+| A           | 2021-01-01 | curry        | 15    | N      |
+| B           | 2021-01-04 | sushi        | 10    | N      |
+| B           | 2021-01-11 | sushi        | 10    | Y      |
+| B           | 2021-01-01 | curry        | 15    | N      |
+| B           | 2021-01-02 | curry        | 15    | N      |
+| B           | 2021-01-16 | ramen        | 12    | Y      |
+| B           | 2021-02-01 | ramen        | 12    | Y      |
+| C           | 2021-01-01 | ramen        | 12    | N      |
+| C           | 2021-01-01 | ramen        | 12    | N      |
+| C           | 2021-01-07 | ramen        | 12    | N      |
 
 <details>
 	<summary>
@@ -537,7 +493,69 @@ Recreate the following table output using the available data:
 
 ```SQL
 
-
+SELECT sales.customer_id, order_date, product_name, price,
+   CASE
+      WHEN members.join_date > sales.order_date THEN 'N'
+      WHEN members.join_date <= sales.order_date THEN 'Y'
+      ELSE 'N'
+      END AS member
+FROM dannys_diner.sales
+JOIN dannys_diner.menu 
+   ON sales.product_id = menu.product_id
+LEFT JOIN members
+   ON sales.customer_id = members.customer_id;
 
 ```
 </details>
+
+---
+*Bonus Question #2*
+Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+<details>
+	<summary>
+		SQL Query
+	</summary>
+
+```SQL
+
+WITH clients_table AS 
+	(
+	SELECT sales.customer_id, order_date, product_name, price,
+    CASE
+    WHEN join_date > order_date THEN 'N'
+    WHEN join_date <= order_date THEN 'Y'
+    ELSE 'N' END AS member
+   	FROM dannys_diner.sales
+	JOIN dannys_diner.menu
+    	ON sales.product_id = menu.product_id
+	LEFT JOIN dannys_diner.members
+      ON sales.customer_id = members.customer_id
+)
+
+SELECT *, 
+	CASE
+	WHEN member = 'N' then NULL
+	ELSE
+    	RANK () OVER(PARTITION BY customer_id, member
+    	ORDER BY order_date) END AS ranking
+FROM clients_table;
+
+```
+
+| customer_id | order_date | product_name | price | member | ranking |
+| ----------- | ---------- | ------------ | ----- | ------ | ------- |
+| A           | 2021-01-01 | sushi        | 10    | N      |         |
+| A           | 2021-01-01 | curry        | 15    | N      |         |
+| A           | 2021-01-07 | curry        | 15    | Y      | 1       |
+| A           | 2021-01-10 | ramen        | 12    | Y      | 2       |
+| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| B           | 2021-01-01 | curry        | 15    | N      |         |
+| B           | 2021-01-02 | curry        | 15    | N      |         |
+| B           | 2021-01-04 | sushi        | 10    | N      |         |
+| B           | 2021-01-11 | sushi        | 10    | Y      | 1       |
+| B           | 2021-01-16 | ramen        | 12    | Y      | 2       |
+| B           | 2021-02-01 | ramen        | 12    | Y      | 3       |
+| C           | 2021-01-01 | ramen        | 12    | N      |         |
+| C           | 2021-01-01 | ramen        | 12    | N      |         |
+| C           | 2021-01-07 | ramen        | 12    | N      |         |
