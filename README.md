@@ -18,9 +18,22 @@ Danny seriously loves Japanese food so in the beginning of 2021, he decides to e
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
 
 ## Skills showcased
-- to add
-- to add
-- to add
+- **Data Wrangling and Preparation**
+	- Created and managed relational database schemas.
+	- Performed joins, data cleaning, and preparation to integrate the sales, menu, and members datasets.
+- **Analytical Problem-Solving**
+	- Addressed 10 business-critical questions, translating Danny’s business challenges into SQL-based solutions.
+	- Delivered actionable insights to improve customer engagement and loyalty strategies.
+- **Advanced SQL Techniques**
+	- Utilized CTEs to break down queries into simpler, more manageable tasks.
+	- Applied window functions (DENSE_RANK, RANK) to analyze customer purchasing trends and loyalty behaviors.
+	- Designed conditional logic with CASE statements for customized calculations like loyalty points allocation.
+- **Data Visualization and Interpretation**
+	- Structured results in readable formats to support decision-making.
+	- Summarized and presented key findings in a business-friendly manner for stakeholders.
+- **Customer Behavior Analytics**
+	- Analyzed customer purchase patterns, frequency, and spending before and after joining the loyalty program.
+	- Offered insights to optimize the loyalty program, including points calculation and item popularity ranking.
 
 ## ASK 
 ### Business Task
