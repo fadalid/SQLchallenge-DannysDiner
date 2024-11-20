@@ -1,26 +1,26 @@
 # SQLchallenge-DannysDiner
-📍 Case study #1 - https://8weeksqlchallenge.com/case-study-1/ by Data with Danny
+📍 Hi there! My name is Fer and I'm following the Case study #1 - https://8weeksqlchallenge.com/case-study-1/ by Data with Danny
+
 ![DannysDiner_logo](https://github.com/fadalid/SQLchallenge-DannysDiner/blob/main/dannysdiner-logo.png?raw=true)
+
 ## Table of contents
 - [Introduction & Problem Statement](#introduction)
 - [Skills showcased](#skills-showcased)
-- [ASK -> Business task](#ask)
-- [PREPARE](#prepare)
-- [PROCESS](#process)
-- [ANALYZE](#analyze)
-- [SHARE](#share)
-- [ACT](#act)
-
+- [Dataset Overview](#dataset-overview)
+- [Case Study Questions & Solutions](#case-study-questions--solutions)
+- [Insights & Recommendations](#insights--recommendations)
+- [Tools & Technologies Used](#tools--technologies-used)
+- [Future Improvements](#future-improvements)
 
 ## Introduction 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
 ### Problem Statement
-Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
+Danny wants some insights to help him decide whether he should expand the existing customer loyalty program - additionally he needs help to generate some basic datasets so his team can easily inspect the data without needing to use SQL.
 
 ## Skills showcased
 - **Data Wrangling and Preparation**
 	- Created and managed relational database schemas.
-	- Performed joins, data cleaning, and preparation to integrate the sales, menu, and members datasets.
+	- Performed joins, data cleaning, and preparation to integrate the <code>sales</code>, <code>menu</code>, and <code>members</code> datasets.
 - **Analytical Problem-Solving**
 	- Addressed 10 business-critical questions, translating Danny’s business challenges into SQL-based solutions.
 	- Delivered actionable insights to improve customer engagement and loyalty strategies.
@@ -35,20 +35,21 @@ Danny wants to use the data to answer a few simple questions about his customers
 	- Analyzed customer purchase patterns, frequency, and spending before and after joining the loyalty program.
 	- Offered insights to optimize the loyalty program, including points calculation and item popularity ranking.
 
-## ASK 
-### Business Task
-Danny wants some insights to help him decide whether he should expand the existing customer loyalty program - additionally he needs help to generate some basic datasets so his team can easily inspect the data without needing to use SQL.
-
-## PREPARE 
+## Dataset Overview
 Danny has shared with you 3 key datasets for this case study:
 - <code>sales</code>
 - <code>menu</code>
 - <code>members</code>
   
-You can inspect the entity relationship diagram and example data below. <br>
+You can inspect the entity relationship diagram below. <br>
 ![Tables_relationship_diagram](https://github.com/fadalid/SQLchallenge-DannysDiner/blob/main/relationship-diagram.png?raw=true)
 
 ### dannys_diner database schema
+
+<details>
+	<summary>
+ 		Creating the schema, <code>sales</code>, <code>menu</code> and <code>members</code> tables
+	</summary>
 
 ```SQL
 
@@ -57,125 +58,102 @@ SET search_path = dannys_diner;
 
 ```
 
-<details>
-	<summary>
-Creating the <code>sales</code> table 
-  </summary>
-
 ```SQL
 
 CREATE TABLE sales (
-  "customer_id" VARCHAR(1),
-  "order_date" DATE,
-  "product_id" INTEGER
+	"customer_id" VARCHAR(1),
+	"order_date" DATE,
+  	"product_id" INTEGER
 );
 
 INSERT INTO sales
-  ("customer_id", "order_date", "product_id")
+	("customer_id", "order_date", "product_id")
 VALUES
-  ('A', '2021-01-01', '1'),
-  ('A', '2021-01-01', '2'),
-  ('A', '2021-01-07', '2'),
-  ('A', '2021-01-10', '3'),
-  ('A', '2021-01-11', '3'),
-  ('A', '2021-01-11', '3'),
-  ('B', '2021-01-01', '2'),
-  ('B', '2021-01-02', '2'),
-  ('B', '2021-01-04', '1'),
-  ('B', '2021-01-11', '1'),
-  ('B', '2021-01-16', '3'),
-  ('B', '2021-02-01', '3'),
-  ('C', '2021-01-01', '3'),
-  ('C', '2021-01-01', '3'),
-  ('C', '2021-01-07', '3');
+	('A', '2021-01-01', '1'),
+	('A', '2021-01-01', '2'),
+	('A', '2021-01-07', '2'),
+	('A', '2021-01-10', '3'),
+	('A', '2021-01-11', '3'),
+	('A', '2021-01-11', '3'),
+	('B', '2021-01-01', '2'),
+	('B', '2021-01-02', '2'),
+	('B', '2021-01-04', '1'),
+	('B', '2021-01-11', '1'),
+	('B', '2021-01-16', '3'),
+	('B', '2021-02-01', '3'),
+	('C', '2021-01-01', '3'),
+	('C', '2021-01-01', '3'),
+	('C', '2021-01-07', '3');
 
 ```
-</details>
-
-<details>
-  <summary>
-Creating the <code>menu</code> table
-  </summary>
 
 ```SQL
 
 CREATE TABLE menu (
-  "product_id" INTEGER,
-  "product_name" VARCHAR(5),
-  "price" INTEGER
+	"product_id" INTEGER,
+	"product_name" VARCHAR(5),
+	"price" INTEGER
 );
 
 INSERT INTO menu
-  ("product_id", "product_name", "price")
+	("product_id", "product_name", "price")
 VALUES
-  ('1', 'sushi', '10'),
-  ('2', 'curry', '15'),
-  ('3', 'ramen', '12');
+	('1', 'sushi', '10'),
+	('2', 'curry', '15'),
+	('3', 'ramen', '12');
 
 ```
-</details>
-
-<details>
-  <summary>
-Creating the <code>members</code> table
-  </summary>
 
 ```SQL
 
 CREATE TABLE members (
-  "customer_id" VARCHAR(1),
-  "join_date" DATE
+	"customer_id" VARCHAR(1),
+	"join_date" DATE
 );
 
 INSERT INTO members
-  ("customer_id", "join_date")
+	("customer_id", "join_date")
 VALUES
-  ('A', '2021-01-07'),
-  ('B', '2021-01-09');
+	('A', '2021-01-07'),
+	('B', '2021-01-09');
 
 ```
 </details>
 
-## PROCESS
-
-## ANALYZE
-
-### Case study questions
+## Case Study Questions & Solutions
 
 ---
 *1. What is the total amount each customer spent at the restaurant?*
 <details>
-  <summary>
+	<summary>
 		SQL Query
-  </summary>
+	</summary>
 
 ```SQL
 SELECT customer_id, SUM(price) AS total_amount
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
-ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 GROUP BY customer_id
 ORDER BY total_amount;
 ```
 </details>
 
+**Output** 
 | customer_id | total_amount |
 | ----------- | ------------ |
 | C           | 36           |
 | B           | 74           |
 | A           | 76           |
 
-**Answer** The total amount each customer spent at the restaurant is: <br>
-- Customer C		$36
-- Customer B		$74
-- Customer A		$76
+**Insight** From here we can spot our best customers, working on offer them benefits to furter assure fidelity. Also we can draw more data on the customers that spent the less to come up with new sales strategies.
 
 ---
 *2. How many days has each customer visited the restaurant?*
 <details>
-  <summary>
+	<summary>
 		SQL Query
-  </summary>
+	</summary>
 
 ```SQL
 SELECT customer_id, COUNT(DISTINCT order_date) AS days_visited
@@ -184,33 +162,31 @@ GROUP BY customer_id;
 ```
 </details>
 
+**Output** 
 | customer_id | days_visited |
 | ----------- | ------------ |
 | A           | 4            |
 | B           | 6            |
 | C           | 2            |
 
-**Answer** Each customer has visited the restaurant for: <br>
-- Customer A		4 days
-- Customer B		6 days
-- Customer C		2 days
+**Insight** To write down
 
 ---
 *3. What was the first item from the menu purchased by each customer?*
 <details>
-  <summary>
+	<summary>
 		SQL Query
-  </summary>
+	</summary>
 
 ```SQL
 WITH sales_ordered AS
 (
-   SELECT customer_id, order_date, product_name,
-      DENSE_RANK() OVER(PARTITION BY sales.customer_id
-      ORDER BY sales.order_date) AS rank
-   FROM dannys_diner.sales
-   JOIN dannys_diner.menu
-      ON sales.product_id = menu.product_id
+	SELECT customer_id, order_date, product_name,
+		DENSE_RANK() OVER(PARTITION BY sales.customer_id
+		ORDER BY sales.order_date) AS rank
+	FROM dannys_diner.sales
+	JOIN dannys_diner.menu
+		ON sales.product_id = menu.product_id
 )
 
 SELECT customer_id, product_name
@@ -220,6 +196,7 @@ GROUP BY customer_id, product_name;
 ```
 </details>
 
+**Output** 
 | customer_id | product_name |
 | ----------- | ------------ |
 | A           | curry        |
@@ -227,10 +204,7 @@ GROUP BY customer_id, product_name;
 | B           | curry        |
 | C           | ramen        |
 
-**Answer** The first item purchased by each customer was: <br>
-- Customer A		curry & sushi
-- Customer B		curry
-- Customer C		ramen
+**Insight** Here we can see wich products have a better response on customers based on first impressions.
 
 ---
 *4. What is the most purchased item on the menu and how many times was it purchased by all customers?*
@@ -241,52 +215,51 @@ GROUP BY customer_id, product_name;
 
 ```SQL
 WITH most_purchased_item AS 
-	(
+(
 	SELECT menu.product_id, menu.product_name, COUNT(sales.product_id) AS item_sales
-  	FROM dannys_diner.sales
-      JOIN dannys_diner.menu
-      ON sales.product_id = menu.product_id
-    GROUP BY menu.product_id, menu.product_name
-  	ORDER BY item_sales DESC
-    LIMIT 1
-  	)
+	FROM dannys_diner.sales
+	JOIN dannys_diner.menu
+		ON sales.product_id = menu.product_id
+	GROUP BY menu.product_id, menu.product_name
+	ORDER BY item_sales DESC
+	LIMIT 1
+)
  
- SELECT customer_id, product_name, COUNT(sales.product_id) AS item_purchases
- FROM dannys_diner.sales
- JOIN most_purchased_item
- ON sales.product_id = most_purchased_item.product_id
- GROUP BY customer_id, most_purchased_item.product_name;
+SELECT customer_id, product_name, COUNT(sales.product_id) AS item_purchases
+FROM dannys_diner.sales
+JOIN most_purchased_item
+	ON sales.product_id = most_purchased_item.product_id
+GROUP BY customer_id, most_purchased_item.product_name;
 ```
 </details>
 
+**Output**
 | customer_id | product_name | item_purchases |
 | ----------- | ------------ | -------------- |
 | A           | ramen        | 3              |
 | B           | ramen        | 2              |
 | C           | ramen        | 3              |
 
-**Answer** The most purchased item on the menu is *Ramen* and it was purchased by each customer: <br>
-- Customer A		3 times
-- Customer B		2 times
-- Customer C		3 times
+**Insight** This query clearly shows us the best selling product that's on the menu.
 
 ---
 *5. Which item was the most popular for each customer?*
 <details>
 	<summary>
 		SQL Query
-  </summary>
+	</summary>
 
 ```SQL
 SELECT customer_id, product_name, COUNT(sales.product_id) AS item_purchases
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
-ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 GROUP BY customer_id, product_name
 ORDER BY item_purchases DESC
 ```
 </details>
 
+**Output**
 | customer_id | product_name | item_purchases |
 | ----------- | ------------ | -------------- |
 | C           | ramen        | 3              |
@@ -297,10 +270,7 @@ ORDER BY item_purchases DESC
 | A           | curry        | 2              |
 | A           | sushi        | 1              |
 
-**Answer** The most popular item for each customer was: <br>
-- Customer C		Ramen
-- Customer A		Ramen
-- Customer B		Curry
+**Insight** This query shows us product's trends among customers.
 
 ---
 *6. Which item was purchased first by the customer after they became a member?*
@@ -310,33 +280,32 @@ ORDER BY item_purchases DESC
 	</summary>
 
 ```SQL
- WITH purchase_date AS
- 	(
- 	SELECT sales.customer_id, join_date, order_date, product_id,
-    	DENSE_RANK() OVER(PARTITION BY sales.customer_id
-      	ORDER BY sales.order_date) AS first_member_purchase
-   	FROM dannys_diner.sales
-   	JOIN dannys_diner.members
-    	  ON sales.customer_id = members.customer_id
-   	WHERE sales.order_date >= members.join_date
-    )
+WITH purchase_date AS
+(
+	SELECT sales.customer_id, join_date, order_date, product_id,
+	DENSE_RANK() OVER(PARTITION BY sales.customer_id
+	ORDER BY sales.order_date) AS first_member_purchase
+	FROM dannys_diner.sales
+	JOIN dannys_diner.members
+    		ON sales.customer_id = members.customer_id
+	WHERE sales.order_date >= members.join_date
+)
     
 SELECT customer_id, product_name, order_date, first_member_purchase
 FROM dannys_diner.menu
 JOIN purchase_date
-ON menu.product_id = purchase_date.product_id
+	ON menu.product_id = purchase_date.product_id
 WHERE first_member_purchase = 1;
 ```
 </details>
 
+**Output**
 | customer_id | product_name | order_date               | first_member_purchase |
 | ----------- | ------------ | ------------------------ | --------------------- |
 | B           | sushi        | 2021-01-11T00:00:00.000Z | 1                     |
 | A           | curry        | 2021-01-07T00:00:00.000Z | 1                     |
 
-**Answer** The first item each customer bought after becaming a member was: <br>
-- Customer B		Sushi
-- Customer A		Curry
+**Insights** This query allow us to see if there was any changes on customers purchases before and after becoming members.
 
 ---
 *7. Which item was purchased just before the customer became a member?*
@@ -347,7 +316,7 @@ WHERE first_member_purchase = 1;
 
 ```SQL
 WITH last_purchase_cte AS
-	(
+(
 	SELECT sales.customer_id, product_id, order_date,
 		DENSE_RANK() OVER(PARTITION BY sales.customer_id 
 		ORDER BY order_date DESC) AS last_purchase
@@ -357,7 +326,7 @@ WITH last_purchase_cte AS
 	WHERE order_date < join_date
 	GROUP BY sales.customer_id, product_id, order_date
 	ORDER BY last_purchase
-    )
+)
     
 SELECT customer_id, product_name, order_date
 FROM last_purchase_cte
@@ -368,15 +337,14 @@ GROUP BY customer_id, product_name, order_date;
 ```
 </details>
 
+**Output**
 | customer_id | product_name | order_date               |
 | ----------- | ------------ | ------------------------ |
 | A           | curry        | 2021-01-01T00:00:00.000Z |
 | A           | sushi        | 2021-01-01T00:00:00.000Z |
 | B           | sushi        | 2021-01-04T00:00:00.000Z |
 
-**Answer** The item each customer bought just before becaming a member was: <br>
-- Customer A		Curry & Sushi
-- Customer B		Sushi
+**Insight** Combining this query with the previous one we have a more clear view of each customer purchases' tendencies.
 
 ---
 *8. What is the total items and amount spent for each member before they became a member?*
@@ -388,26 +356,25 @@ GROUP BY customer_id, product_name, order_date;
 ```SQL
 SELECT sales.customer_id,
 	COUNT(sales.product_id) AS total_items,
-    SUM(price) AS total_amount
+	SUM(price) AS total_amount
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
-ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 JOIN dannys_diner.members
-ON sales.customer_id = members.customer_id
+	ON sales.customer_id = members.customer_id
 WHERE order_date < join_date
 GROUP BY sales.customer_id;
 
 ```
 </details>
 
+**Output**
 | customer_id | total_items | total_amount |
 | ----------- | ----------- | ------------ |
 | B           | 3           | 40           |
 | A           | 2           | 25           |
 
-**Answer** The total number of items and amount spent of each customer before de became a member are:
-- Customer B 3 items, $40
-- Customer A 2 items, $25
+**Insight** 
 
 ---
 *9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?*
@@ -419,28 +386,26 @@ GROUP BY sales.customer_id;
 ```SQL
 SELECT customer_id, 
 	SUM(
-    CASE WHEN sales.product_id = 1 THEN price*20
-    ELSE price*10 END
-    ) AS points
+		CASE WHEN sales.product_id = 1 THEN price*20
+		ELSE price*10 END
+	) AS points
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
-ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 GROUP BY customer_id 
 ORDER BY points;
 
 ```
 </details>
 
+**Output**
 | customer_id | points |
 | ----------- | ------ |
 | C           | 360    |
 | A           | 860    |
 | B           | 940    |
 
-**Answer** Te total amount of points each customer has is:
-- Customer C 360
-- Customer A 860
-- Customer B 940
+**Insight** 
 
 ---
 *10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?*
@@ -452,29 +417,28 @@ ORDER BY points;
 ```SQL
 SELECT sales.customer_id,
 	SUM(
-      CASE WHEN order_date >= join_date
-      AND order_date < (join_date +7) THEN price*20
-      WHEN sales.product_id = 1 THEN price*20
-      ELSE price*10 END) AS points
+		CASE WHEN order_date >= join_date
+		AND order_date < (join_date +7) THEN price*20
+		WHEN sales.product_id = 1 THEN price*20
+		ELSE price*10 END) AS points
 FROM dannys_diner.sales
 JOIN dannys_diner.menu
-ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 JOIN dannys_diner.members
-ON sales.customer_id = members.customer_id
+	ON sales.customer_id = members.customer_id
 WHERE order_date <= '2021-01-31'
 GROUP BY sales.customer_id;
 
 ```
 </details>
 
+**Output**
 | customer_id | points |
 | ----------- | ------ |
 | A           | 1370   |
 | B           | 820    |
 
-**Answer** By the end of January, customer members have:
-- Customer A 1370 points
-- Customer B 820 points
+**Insight** 
 
 ---
 *Bonus Question #1*
@@ -506,16 +470,16 @@ Recreate the following table output using the available data:
 ```SQL
 
 SELECT sales.customer_id, order_date, product_name, price,
-   CASE
-      WHEN members.join_date > sales.order_date THEN 'N'
-      WHEN members.join_date <= sales.order_date THEN 'Y'
-      ELSE 'N'
-      END AS member
+	CASE
+	WHEN members.join_date > sales.order_date THEN 'N'
+	WHEN members.join_date <= sales.order_date THEN 'Y'
+	ELSE 'N'
+	END AS member
 FROM dannys_diner.sales
 JOIN dannys_diner.menu 
-   ON sales.product_id = menu.product_id
+	ON sales.product_id = menu.product_id
 LEFT JOIN members
-   ON sales.customer_id = members.customer_id;
+	ON sales.customer_id = members.customer_id;
 
 ```
 </details>
@@ -533,15 +497,15 @@ Danny also requires further information about the ranking of customer products, 
 WITH clients_table AS 
 	(
 	SELECT sales.customer_id, order_date, product_name, price,
-    CASE
-    WHEN join_date > order_date THEN 'N'
-    WHEN join_date <= order_date THEN 'Y'
-    ELSE 'N' END AS member
+		CASE
+		WHEN join_date > order_date THEN 'N'
+		WHEN join_date <= order_date THEN 'Y'
+		ELSE 'N' END AS member
    	FROM dannys_diner.sales
 	JOIN dannys_diner.menu
-    	ON sales.product_id = menu.product_id
+    		ON sales.product_id = menu.product_id
 	LEFT JOIN dannys_diner.members
-      ON sales.customer_id = members.customer_id
+      		ON sales.customer_id = members.customer_id
 )
 
 SELECT *, 
@@ -555,6 +519,7 @@ FROM clients_table;
 ```
 </details>
 
+**Output**
 | customer_id | order_date | product_name | price | member | ranking |
 | ----------- | ---------- | ------------ | ----- | ------ | ------- |
 | A           | 2021-01-01 | sushi        | 10    | N      |         |
@@ -573,6 +538,12 @@ FROM clients_table;
 | C           | 2021-01-01 | ramen        | 12    | N      |         |
 | C           | 2021-01-07 | ramen        | 12    | N      |         |
 
-## SHARE
+##Insights & Recommendations
 
-## ACT
+##Tools & Technologies Used
+- SQL (for querying and analysis)
+- Tableau (for visualization)
+- GitHub (for documentation)
+
+##Future Improvements
+- Develop a dashboard in Tableau for real-time insights.
