@@ -4,7 +4,7 @@
 ![DannysDiner_logo](https://github.com/fadalid/SQLchallenge-DannysDiner/blob/main/dannysdiner-logo.png?raw=true)
 
 ## Table of contents
-- [Introduction & Problem Statement](#introduction)
+- [Introduction & Business Challenge](#introduction)
 - [Skills showcased](#skills-showcased)
 - [Dataset Overview](#dataset-overview)
 - [Case Study Questions & Solutions](#case-study-questions--solutions)
@@ -14,7 +14,7 @@
 
 ## Introduction 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
-### Problem Statement
+### Business Challenge
 Danny wants some insights to help him decide whether he should expand the existing customer loyalty program - additionally he needs help to generate some basic datasets so his team can easily inspect the data without needing to use SQL.
 
 ## Skills showcased
@@ -41,7 +41,7 @@ Danny has shared with you 3 key datasets for this case study:
 - <code>menu</code>
 - <code>members</code>
   
-You can inspect the entity relationship diagram below. <br>
+You can inspect the entity relationship diagram below: <br>
 ![Tables_relationship_diagram](https://github.com/fadalid/SQLchallenge-DannysDiner/blob/main/relationship-diagram.png?raw=true)
 
 ### dannys_diner database schema
@@ -122,7 +122,6 @@ VALUES
 
 ## Case Study Questions & Solutions
 
----
 *1. What is the total amount each customer spent at the restaurant?*
 <details>
 	<summary>
@@ -169,7 +168,7 @@ GROUP BY customer_id;
 | B           | 6            |
 | C           | 2            |
 
-**Insight** To write down
+**Insight** A simple query to identify trends in purchase patterns. 
 
 ---
 *3. What was the first item from the menu purchased by each customer?*
@@ -270,7 +269,7 @@ ORDER BY item_purchases DESC
 | A           | curry        | 2              |
 | A           | sushi        | 1              |
 
-**Insight** This query shows us product's trends among customers.
+**Insight** This query shows us products' trends among customers.
 
 ---
 *6. Which item was purchased first by the customer after they became a member?*
@@ -305,7 +304,7 @@ WHERE first_member_purchase = 1;
 | B           | sushi        | 2021-01-11T00:00:00.000Z | 1                     |
 | A           | curry        | 2021-01-07T00:00:00.000Z | 1                     |
 
-**Insights** This query allow us to see if there was any changes on customers purchases before and after becoming members.
+**Insight** This query allow us to see if there was any changes on customers purchases before and after becoming members.
 
 ---
 *7. Which item was purchased just before the customer became a member?*
@@ -344,7 +343,7 @@ GROUP BY customer_id, product_name, order_date;
 | A           | sushi        | 2021-01-01T00:00:00.000Z |
 | B           | sushi        | 2021-01-04T00:00:00.000Z |
 
-**Insight** Combining this query with the previous one we have a more clear view of each customer purchases' tendencies.
+**Insight** Combining this query with the previous one we have a more clear view of each member purchases' tendencies.
 
 ---
 *8. What is the total items and amount spent for each member before they became a member?*
@@ -374,7 +373,7 @@ GROUP BY sales.customer_id;
 | B           | 3           | 40           |
 | A           | 2           | 25           |
 
-**Insight** 
+**Insight** One more layer of depth to the members purchases' tendencies.
 
 ---
 *9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?*
@@ -404,8 +403,6 @@ ORDER BY points;
 | C           | 360    |
 | A           | 860    |
 | B           | 940    |
-
-**Insight** 
 
 ---
 *10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?*
@@ -437,8 +434,6 @@ GROUP BY sales.customer_id;
 | ----------- | ------ |
 | A           | 1370   |
 | B           | 820    |
-
-**Insight** 
 
 ---
 *Bonus Question #1*
@@ -538,12 +533,26 @@ FROM clients_table;
 | C           | 2021-01-01 | ramen        | 12    | N      |         |
 | C           | 2021-01-07 | ramen        | 12    | N      |         |
 
-##Insights & Recommendations
+## Insights & Recommendations
+- Customer Behavior and Preferences
+	- Customer Segmentation: identify distinct customer segments based on factors like purchase frequency, average order value, and product preferences.
+	- Product Preferences: analyze which products are most popular among different customer segments.
+	- Purchase Patterns: identify trends in purchase patterns, such as peak hours, days of the week, or seasonal variations.
+- Loyalty Program Effectiveness
+	- Impact on Sales: quantify the impact of the loyalty program on sales and revenue.
+	- Customer Retention: analyze the impact of the loyalty program on customer retention rates.
+	- Customer Engagement: measure customer engagement with the loyalty program.
+- Operational Insights
+	- Inventory Management: identify slow-moving and fast-moving items to optimize inventory levels.
+	- Pricing Strategy: analyze the impact of pricing strategies on sales and revenue.
 
-##Tools & Technologies Used
+## Tools & Technologies Used
 - SQL (for querying and analysis)
 - Tableau (for visualization)
 - GitHub (for documentation)
 
-##Future Improvements
+## Future Improvements
 - Develop a dashboard in Tableau for real-time insights.
+
+### This was fun! 😁
+This project was created as part of my journey into data analytics. I found it beginner friendly and easy to work with.
